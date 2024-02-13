@@ -1,0 +1,26 @@
+const badWords = ['fuck', 'ass', 'shit', 'bitch', 'nigger', 'dick', 'motherfucker', 'cock', 'fucker', 'asscock', 'penis']; // List of bad words
+const badNames = ['fuck', 'ass', 'shit', 'bitch', 'nigger', 'dick', 'motherfucker', 'cock', 'fucker', 'asscock', 'penis']; // List of bad user names
+
+Insert after imports
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if
+          request.time < timestamp.date(2023, 10, 7);
+    }
+  }
+}
+
+Seizure Code: 
+    transform: translateY(-50%) translateX(-100%);
+
+
+Cookie:
+      const savedName = getCookie('username');
+      if (savedName) {
+        setUserName(savedName);
+        addOnlineUser(savedName);
+      }

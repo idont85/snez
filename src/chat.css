@@ -1,0 +1,694 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap');
+
+#heading {
+    text-align: center;
+    
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.chat-container {
+    max-width: fill;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(244, 244, 244, 0.9); /* Light gray background color with opacity */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 77vh; /* Set the desired fixed height for the chat container */
+  }
+  
+  .message-box {
+    flex-grow: 1;
+    overflow-y: scroll;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+  
+  .message {
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.9); /* White background color with opacity */
+  }
+  
+
+  
+  .message-sender {
+    font-size: 10px;
+    color: #777;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+  }
+  
+  .message-text {
+    font-size: 16px;
+  }
+  
+  .message-time {
+    font-size: 12px;
+    color: #999;
+  }
+  
+  .message-input {
+    width: 99.5%;
+    padding: 10px;
+    border: solid;
+    border-color: rgb(174, 171, 171);
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.9); /* White background color with opacity */
+  }
+  
+  .nametag-input {
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    margin-top: 5px; /* Add a margin to create space */
+    background-color: rgba(255, 255, 255, 0.9); /* White background color with opacity */
+    width: 10vw;
+    height: 0.1vh;
+    border: solid;
+    font-family: 'Roboto', sans-serif;
+    float: left;
+    position: relative;
+    z-index: 9999;
+    top: 1.6vh;
+    margin-left: 1vw;
+  }
+
+  .clock {
+    scale: 1;
+    margin: auto;
+    margin-top: 8px;
+    border-radius: 15px;
+    border: solid;
+    text-align: right;
+    position: absolute;
+    align-self: center;
+    width: 96%;
+    z-index: 9999;
+    background-color: white;
+    opacity: 0; /* Initially set opacity to 0 */
+    transition: opacity 0.25s ease-in; /* Add a transition effect to opacity */
+  
+    /* Additional styles */
+    padding: 10px; /* Adjust padding as needed */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%) translateY(50%); /* Center the clock div */
+  
+    /* Ensure the clock div doesn't go above the page */
+    max-height: 50vh; /* Adjust the max height as needed */
+    overflow: auto;
+  }
+  
+  #userlabel {
+    float: left;
+  }
+  
+  
+  
+  .clock:hover {
+    opacity: 1; /* Change opacity to 1 on hover */
+  }
+
+  #yes {
+    margin-right: 3vw;
+  }
+  
+  .send-button {
+    background-color: rgba(0, 123, 255, 0.9); /* Blue color with opacity */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .send-button:hover {
+    background-color: rgba(0, 102, 204, 0.999999); /* Darker blue color with opacity */
+  }
+  
+  .user-list {
+    position: absolute;
+    width: 200px;
+    background-color: #f0f0f0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    overflow-y: auto;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Updated transition properties */
+    transition-delay: 1s;
+    right: 1.5vw;
+    top: 2.3vh;
+}
+
+.user-list:hover {
+    opacity: 0;
+    transform: scaleY(0.1);
+}
+
+
+
+
+
+
+  
+  
+  
+/* chat.css */
+.user-list {
+  flex: 1;
+  border-radius: 10px; /* Add rounded corners */
+}
+
+.online-users-heading {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.online-users-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.online-user {
+  background-color: #f2f2f2;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: 6px 0;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.2s ease;
+}
+
+.online-user:hover {
+  background-color: #e0e0e0;
+}
+
+.delete-messages-button {
+  background-color: transparent;
+  color: #ff5252; /* Blue text color */
+  border: 1px solid #ff5252; /* Blue border */
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+  /* Additional styles for hover effect */
+  &:hover {
+    background-color: #ff5252; /* Blue background */
+    color: #fff; /* White text color */
+  }
+}
+
+.delete-user-messages-button {
+  background-color: transparent;
+  color: #ff5252; /* Cool shade of red */
+  border: 1px solid #ff5252; /* Red border */
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+  /* Additional styles for hover effect */
+  &:hover {
+    background-color: #ff5252; /* Red background */
+    color: #fff; /* White text color */
+  }
+}
+
+.ban-button {
+  background-color: transparent;
+  color: #ff5252; /* Cool shade of red */
+  border: 1px solid #ff5252; /* Red border */
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+  /* Additional styles for hover effect */
+  &:hover {
+    background-color: #ff5252; /* Red background */
+    color: #fff; /* White text color */
+  }
+}
+
+.delete-all-ban-messages-button {
+  background-color: transparent;
+  color: #ff5252; /* Cool shade of red */
+  border: 1px solid #ff5252; /* Red border */
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+  /* Additional styles for hover effect */
+  &:hover {
+    background-color: #ff5252; /* Red background */
+    color: #fff; /* White text color */
+  }
+}
+
+.pr-options-button {
+  background-color: #e1e1ea;
+  color: black; /* Cool shade of red */
+  border: 0px solid black; /* Red border */
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+  /* Additional styles for hover effect */
+  &:hover {
+    background-color: black; /* Red background */
+    color: #e1e1ea; /* White text color */
+  }
+}
+
+.overlay-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient( black, #7e7e81);
+  opacity: 0.5;
+  z-index: 9999; /* A high z-index value to ensure it's on top */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center;
+  display: none;
+}
+
+#inputlabel {
+  border-radius: 20%;
+  border-width: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the label */
+  color: white;
+  font-size: 35px;
+}
+
+.pbbox {
+  width: 25%;
+  padding: 8px;
+  border: solid;
+  border-color: black;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.9); /* White background color with opacity */
+}
+
+/* In your CSS file (chat.css) */
+.delete-message-button {
+  margin-left: 90%;
+}
+
+#logos {
+  float: left;
+  margin-left: 25.5vw;
+  height: 7vh;
+
+}
+
+/* Style the trash can icon */
+.delete-message-button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust the right position as needed */
+  transform: translateY(-50%);
+  opacity: 0; /* Initially hide the trash can icon */
+  margin-left: 5px;
+}
+
+/* Show the trash can icon on hover */
+.your-message:hover .delete-message-button {
+  opacity: 1;
+}
+
+.copy-username-button {
+  
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 50px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dark-mode {
+  background-color: #333; /* Dark background color */
+  color: #fff; /* Light text color */
+
+  /* Add more dark mode styles here */
+}
+
+.dark-mode .message-box {
+  background-color: #333; /* Darker background color for messages */
+  color: #34b11b; /* Light text color for messages */
+}
+
+.dark-mode .message {
+  background-color: #222; /* Darker message background */
+}
+
+.dark-mode body {
+  background-color: black;
+}
+
+.dark-mode .message-sender {
+  background-color: #424242; /* Darker sender background */
+  color: #fff; /* Light text color for sender */
+  opacity: 95%;
+}
+
+.dark-mode .message-input{
+  background-color: #d9d9d9;
+}
+
+.dark-mode .nametag-input{
+  background-color: #d9d9d9;
+}
+
+/* Add more dark mode styles as needed */
+
+/* Button to toggle dark mode */
+.toggle-dark-mode {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  margin-top: 10px;
+}
+
+.toggle-dark-mode:hover {
+  background-color: #444; /* Slightly darker background on hover */
+}
+
+.dark-mode .user-list{
+  background-color: #444;
+}
+
+.dark-mode .online-user{
+  background-color: #333;
+  color: white;
+}
+
+.dark-mode .copy-username-button {
+  background-color: #222;
+  color: white;
+  border-color: white;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
+.dark-mode body {
+  background-color: #333;
+}
+
+body {
+  background-color: transparent;
+}
+
+.dark-mode ::-webkit-scrollbar {
+  width: 12px; /* Adjust the width as needed */ 
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+  background-color: #222; /* Color of the scrollbar thumb */
+  border-radius: 6px;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the scrollbar thumb on hover */
+}
+
+.dark-mode .chat-container {
+  border: 1px solid #b3b3b3;
+}
+
+.dark-mode-button {
+  background-color: #777;
+  color: white; /* Cool shade of red */
+  border: 0px solid black; /* Red border */
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  margin-left: 2px;
+
+  /* Additional styles for hover effect */
+  &:hover {
+    background-color: black; /* Red background */
+    color: #e1e1ea; /* White text color */
+  }
+}
+
+.dark-mode .clock {
+  background-color: #999;
+  border-color: rgb(216, 212, 212);
+  border-width: 4px;
+  color: white;
+}
+
+.dark-mode .usercounter {
+  color: white;
+}
+
+.dark-mode .dark-mode-button {
+  background-color: #d8d8a6;
+  color: black; /* Cool shade of red */
+  border: 0px solid black; /* Red border */
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  margin-left: 1px; 
+
+  /* Additional styles for hover effect */
+  &:hover {
+    background-color: black; /* Red background */
+    color: #e1e1ea; /* White text color */
+  }
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: black transparent black transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-message {
+  padding-top: 5px;
+  font-size: 18px;
+  color: slategray;
+}
+
+
+
+.loading-screen {
+  text-align: center;
+}
+
+.implant-text {
+  padding-top: 25%;
+}
+
+.dark-mode .send-button {
+  background-color: #0056b3;
+}
+
+.dark-mode .pr-options-button {
+  background-color: #b4b4cb;
+}
+
+.loading-div {
+  /* Set initial opacity to 0 to make it invisible */
+  opacity: 0;
+  /* Apply a smooth transition on opacity property */
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Class to make the loading div visible */
+.show {
+  opacity: 1;
+}
+
+/* Class to make the loading div invisible */
+.hide {
+  opacity: 0;
+  /* Make it invisible, but still take up space in the layout */
+  display: none;
+}
+
+.delete-all-online-users-button {
+  background-color: transparent;
+  color: #ff5252; /* Cool shade of red */
+  border: 1px solid #ff5252; /* Red border */
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+  /* Additional styles for hover effect */
+  &:hover {
+    background-color: #ff5252; /* Red background */
+    color: #fff; /* White text color */
+  }
+}
+
+.blur {
+  filter: blur(4px); /* or your desired blur value */
+}
+.message-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.message {
+  list-style: none; /* Remove default list style */
+  display: flex; /* Use flexbox for layout */
+}
+
+.message::before {
+  content: attr(data-first-letter);
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  width: 2.5em;
+  height: 2.5em;
+  background-color: #3498db;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  color: white;
+  font-weight: bold;
+}
+
+.message-container {
+  flex: 1; /* Take up remaining space */
+  display: flex;
+  flex-direction: column;
+}
+
+.message-text {
+  margin-top: 0;
+  overflow-wrap: break-word;
+  word-break: break-all; /* Add this line */
+}
+
+.message-time {
+  margin-top: 0.2em; /* Adjust as needed */
+}
+
+
+
+
+
+.message-sender {
+  font-size: 10px;
+  color: #ffffff;
+  position: absolute;
+  top: 6vh;
+  left: 0;
+  padding: 0 8px;
+  background-color: rgba(94, 93, 93, 0.764);
+  border-radius: 5px;
+}
+
+/* Add this if you want the circle to have the first letter of the sender's name */
+.message::before {
+  content: attr(data-first-letter); /* Use the first letter of the sender's name */
+}
+
+/* Add this if you want to hide the default marker */
+.message-list li {
+  list-style-type: none;
+}
